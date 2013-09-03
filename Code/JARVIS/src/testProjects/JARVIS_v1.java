@@ -21,6 +21,8 @@ public class JARVIS_v1 {
 	
 	public static void main(String[] args) throws Exception{
 		String fPath="C:\\Users\\Janbro\\Documents\\J.A.R.V.I.S\\Resources";
+		String myPhoneNum = "myPhoneNum";
+		String targetPhoneNum = "targetPhoneNum";
 		String fileName="LastMessage.txt";
 		String filePath = fPath+"\\"+fileName;
 		FileReader file1 = new FileReader(filePath);
@@ -82,7 +84,7 @@ public class JARVIS_v1 {
 				}
 			}
 			for(int i=0;i<numbers.size();i++){
-				if(numbers.get(i).toLowerCase().contains("9547323823")&&numbers.get(i).contains("-")/*&&timeToInt(numbers.get(i).substring(0,numbers.get(i).indexOf("-")))>lastTime*/){
+				if(numbers.get(i).toLowerCase().contains(myPhoneNum)&&numbers.get(i).contains("-")/*&&timeToInt(numbers.get(i).substring(0,numbers.get(i).indexOf("-")))>lastTime*/){
 					lastTime = round(timeToInt(numbers.get(i).substring(0,numbers.get(i).indexOf("-"))),2);
 					clvrBotMess=numbers.get(i).substring(numbers.get(i).lastIndexOf("(<#>)")+5);
 				}
@@ -105,11 +107,11 @@ public class JARVIS_v1 {
 				        
 				        tempBr.close();
 				        s = "Here is what you were looking for, sir:[BEGIN]\n"+mess+"\n[END]";
-				        vp.getPhone().sendSMS("9547323823", s);
+				        vp.getPhone().sendSMS(myPhoneNum, s);
 					}
 					else if(clvrBotMess.toLowerCase().contains("no")){
 						s = "Sorry, try more specific details.";
-						vp.getPhone().sendSMS("9547323823", s);
+						vp.getPhone().sendSMS(myPhoneNum, s);
 					}
 					waitingForInput=false;
 				}
@@ -120,7 +122,7 @@ public class JARVIS_v1 {
 							bw.write(clvrBotMess.substring(clvrBotMess.indexOf(":")+1));
 							bw.close();
 							s = "I have successfully memorized that for you!";
-							vp.getPhone().sendSMS("9547323823", s);
+							vp.getPhone().sendSMS(myPhoneNum, s);
 						}else if(clvrBotMess.toLowerCase().contains("do")||clvrBotMess.toLowerCase().contains("which")){
 							if(clvrBotMess.toLowerCase().contains("you")||clvrBotMess.toLowerCase().contains("which")){
 								s = "were in";
@@ -151,7 +153,7 @@ public class JARVIS_v1 {
 								}
 								//System.out.println("Are you speaking of:"+topFileName+"?");//File name placeholder(for now)
 								s = "Are you speaking of "+topFileName+"?";
-								vp.getPhone().sendSMS("9547323823", s);
+								vp.getPhone().sendSMS(myPhoneNum, s);
 								memFilePath=fPath+"\\Memories\\"+topFileName;
 								waitingForInput=true;
 							}
@@ -159,11 +161,11 @@ public class JARVIS_v1 {
 					}else if(clvrBotMess.toLowerCase().contains("thank you")){
 						if((int)(Math.random()*2)==0){
 							s = "You are very welcome, monsiuer.";
-							vp.getPhone().sendSMS("9547323823", s);
+							vp.getPhone().sendSMS(myPhoneNum, s);
 						}
 						else{
 							s = "I strive to do my best sir.";
-							vp.getPhone().sendSMS("9547323823", s);
+							vp.getPhone().sendSMS(myPhoneNum, s);
 						}
 					}
 				}else{
@@ -176,7 +178,7 @@ public class JARVIS_v1 {
 					s = bot2session.think(s);
 					System.out.println(">>"+s);
 				
-					vp.getPhone().sendSMS("9547323823", s);
+					vp.getPhone().sendSMS(myPhoneNum, s);
 				}
 			}
 			System.out.println(lastTime+":"+clvrBotMess+"\n"+s);
